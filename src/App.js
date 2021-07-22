@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import GoodList from "./components/goods/GoodList";
+import OrderForm from "./components/orderForm/OrderForm";
+import Summary from "./components/summary/Summary";
+import { AnimatePresence, motion } from "framer-motion";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <AnimatePresence>
+          <Switch>
+            <Route exact path="/goods" render={() => <GoodList />} />
+            <Route exact path="/goods/order" render={() => <OrderForm />} />
+            <Route
+              exact
+              path="/goods/order/summary"
+              render={() => <Summary />}
+            />
+            <Route exact path="*" render={() => <div>404 NOT FOUND</div>} />
+          </Switch>
+        </AnimatePresence>
+      </Router>
     </div>
   );
-}
+};
 
 export default App;
